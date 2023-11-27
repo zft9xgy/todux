@@ -1,0 +1,36 @@
+{% extends 'main.html' %}
+
+
+{% block title %}
+Home
+{% endblock %}
+
+{% block content %}
+<h1>Home</h1>
+<p>Todux, todoist made for people</p>
+
+<div>
+    <h2>Tasks</h2>
+{% for task in tasks %}
+
+<div>
+    Id:{{task.id}} - Title: {{task.title}} - <input type="checkbox" name="done" {% if task.done %} checked {% endif %}>
+</div>
+
+{% endfor %}
+</div>
+<hr>
+<div>
+    <h2>Projects</h2>
+{% for project in projects %}
+
+<div>
+    Id:{{project.id}} - Title: <a href="{% url 'project' project.id %}">{{project.title}}</a>
+    <p>{{project.description}}</p>
+</div>
+
+{% endfor %}
+</div>
+
+
+{% endblock %}
