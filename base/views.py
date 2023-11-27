@@ -1,10 +1,10 @@
 from django.shortcuts import render,redirect, get_object_or_404
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .models import Task,Project,Tag
 from .forms import TaskForm
-
 
 def home(request):
     # s = request.GET.get('s')
@@ -61,6 +61,7 @@ def inbox(request):
     return render(request,'base/inbox.html')
 
 
+@login_required(login_url='login')
 def addTask(request):
     form = TaskForm()
     if request.method == 'POST':
@@ -72,6 +73,7 @@ def addTask(request):
     context = {'form':form.as_p}
     return render(request,'base/add_task.html',context)
 
+@login_required(login_url='login')
 def updateTask(request,pk):
     task = Task.objects.get(id=pk)
     form = TaskForm(instance=task)
@@ -85,6 +87,7 @@ def updateTask(request,pk):
     context = {'form':form.as_p}
     return render(request,'base/add_task.html',context)
 
+@login_required(login_url='login')
 def deleteTask(request,pk):
     task = Task.objects.get(id=pk)
     # form = TaskForm(instance=task)
