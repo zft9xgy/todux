@@ -8,3 +8,10 @@ htmlcov/
 docs/_build/
 dist/
 **/__pycache__/
+
+
+# Otros archivos generados
+*.pyc
+*.pyo
+*.pyd
+

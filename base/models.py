@@ -1,5 +1,6 @@
 from django.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator
+from django.contrib.auth.models import User
 
 class Project(models.Model):
 
@@ -10,6 +11,9 @@ class Project(models.Model):
     # meta data
     updated = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
+
+    # relational data
+    owner = models.ForeignKey(User, on_delete=models.CASCADE,null=True)
 
     def __str__(self):
         return f'Project {self.id}: {self.title}'
@@ -40,6 +44,7 @@ class Task(models.Model):
 
     # relational
     project = models.ForeignKey(Project, on_delete=models.CASCADE)
+    owner = models.ForeignKey(User, on_delete=models.CASCADE,null=True)
     tags = models.ManyToManyField(Tag, blank=True)
 
     class Meta():
