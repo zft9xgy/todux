@@ -8,12 +8,8 @@ para ejecutar el sercicio `python manage.py runserver`
 
 ## progreso con el tutorial
 
-1:26
-https://www.youtube.com/watch?v=PtQiiknWUcI
-
-26 noviembre de 2023
-me he quedado en el video por 02:39
-https://www.youtube.com/watch?v=PtQiiknWUcI
+user registration
+https://youtu.be/PtQiiknWUcI?feature=shared&t=10182
 
 otra referencia para ver en youtube
 https://www.youtube.com/watch?v=tYKRAXIio28
