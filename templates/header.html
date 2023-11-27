@@ -8,4 +8,10 @@
     </style>
 <nav><a href="/" class="link">Home</a></nav>
 <nav><a href="/inbox" class="link">Inbox</a></nav>
+{%  if request.user.is_authenticated  %}
+<nav></nav><a href="{% url 'logout' %}">Logout</a></nav>
+{% else %}
+<nav></nav><a href="{% url 'login' %}">Login</a></nav>
+{% endif %}
 </header>
+<hr>
