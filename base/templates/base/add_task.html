@@ -1,0 +1,17 @@
+{% extends 'main.html' %}
+
+{% block title %}
+Add Task
+{% endblock %}
+
+{% block content %}
+<div>
+    <div>
+        <form action="" method="post">
+            {% csrf_token %}
+            {{ form }}
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+</div>
+{% endblock %}

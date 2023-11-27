@@ -2,27 +2,13 @@
 
 
 {% block title %}
-Home
+{{tag}}
 {% endblock %}
 
 {% block content %}
-<h1>Home</h1>
-<p>Todux, todoist made for people</p>
 
 <div>
-    <style>
-        li{
-            display: inline-block;
-        }
-    </style>
-    <h2>Tags</h2>
-    {% for tag in tags %}
-    <li><a href="{% url 'tag' tag.pk %}">#{{tag}}</a></li> |
-    {% endfor %}
-</div>
-
-<div>
-    <h2>Tasks</h2>
+    <h1>{{tag}}</h1>
     <strong><a href="{% url 'add-task' %}">Add new task</a></strong>
 {% for task in  tasks %}
 
@@ -33,18 +19,7 @@ Home
 
 {% endfor %}
 </div>
-<hr>
-<div>
-    <h2>Projects</h2>
-{% for project in projects %}
 
-<div>
-    Id:{{project.id}} - Title: <a href="{% url 'project' project.id %}">{{project.title}}</a>
-    <p>{{project.description}}</p>
-</div>
-
-{% endfor %}
-</div>
 
 
 {% endblock %}

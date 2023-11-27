@@ -24,6 +24,10 @@ https://www.youtube.com/@DennisIvy
 - que es el modelo mvt
 - que es un modelo?
 - que es una vista?
+- cuando se crear una tarea que por defecto este en el proyecto inbox
+- cuando se crea una tarea que por efecto redirija al sitio desde donde se creo
+- cuando se cree una tarea esta debe tomar el proyecto desde donde se ha creado. 
+-- quizas todo esto se maneje mejor desde el front
 
 ## ideas
 

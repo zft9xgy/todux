@@ -42,6 +42,9 @@ class Task(models.Model):
     project = models.ForeignKey(Project, on_delete=models.CASCADE)
     tags = models.ManyToManyField(Tag, blank=True)
 
+    class Meta():
+        ordering = ['done']
+
 
     def __str__(self):
         status = "Done" if self.done else "Not Done"
