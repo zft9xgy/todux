@@ -6,18 +6,19 @@ Home
 {% endblock %}
 
 {% block content %}
-<h1>Home</h1>
-<p>Todux, todoist made for people</p>
+<h1>Todux</h1>
+<p>the user-centred and community-driven to-do app.</p>
 
 <div>
     <style>
-        li{
+        .li{
             display: inline-block;
         }
     </style>
     <h2>Tags</h2>
+    <strong><a href="{% url 'create-tag' %}">Create new tag</a></strong>
     {% for tag in tags %}
-    <li><a href="{% url 'tag' tag.pk %}">#{{tag}}</a></li> |
+    <li><a href="{% url 'tag' tag.pk %}">#{{tag}}</a>[<a href="{% url 'update-tag' tag.pk %}">Edit</a> | <a href="{% url 'delete-tag' tag.pk %}">Delete</a>]</li> 
     {% endfor %}
 </div>
 
@@ -39,7 +40,7 @@ Home
 {% for project in projects %}
 
 <div>
-    Id:{{project.id}} - Title: <a href="{% url 'project' project.id %}">{{project.title}}</a>  |<div> <a href="{% url 'update-project' project.id %}">Edit</a> |  <a href="{% url 'delete-project' project.id %}" class=""> Delete</a></div>
+    Id:{{project.id}} - Title: <a href="{% url 'project' project.id %}">{{project.title}}</a>  | <div> <a href="{% url 'update-project' project.id %}">Edit</a> |  <a href="{% url 'delete-project' project.id %}" class=""> Delete</a></div>
     <p>{{project.description}}</p>
 </div>
 

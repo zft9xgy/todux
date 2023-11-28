@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 from .models import Task,Project,Tag
-from .forms import TaskForm, ProjectForm
+from .forms import TaskForm, ProjectForm, TagForm
 
 @login_required(login_url='login')
 def home(request):
@@ -202,3 +202,56 @@ def updateProject(request,pk):
 
     context = {'form':form.as_p}
     return render(request,'base/add_task.html',context)
+
+
+# tag CRUD
+
+@login_required(login_url='login')
+def createTag(request):
+    user = request.user
+    form = TagForm()
+    if request.method == 'POST':
+        form = TagForm(request.POST)
+
+        if form.is_valid():
+            tag = form.save(commit=False)
+            tag.owner = user
+            tag.save()
+            #return redirect('tag',pk=tag.pk) 
+            return redirect('home')
+
+    context = {'form':form} 
+    return render(request,'base/tags/create_tag.html',context)
+
+
+@login_required(login_url='login')
+def deleteTag(request,pk):
+    tag = Tag.objects.get(id=pk)
+
+    if request.user != tag.owner:
+        return HttpResponse("You cant do that")
+
+    if request.method == 'POST':
+        tag.delete()
+        return redirect('home')
+
+    context = {'obj':tag}
+    return render(request,'base/delete.html',context)
+
+@login_required(login_url='login')
+def updateTag(request,pk):
+
+    tag = Tag.objects.get(id=pk)
+    form = TagForm(instance=tag)
+
+    if request.user != tag.owner:
+        return HttpResponse("You cant do that")
+
+    if request.method == 'POST':
+        form = TagForm(request.POST,instance=tag)
+        if form.is_valid():
+            form.save()
+            return redirect('home')
+
+    context = {'form':form.as_p}
+    return render(request,'base/tags/create_tag.html',context)

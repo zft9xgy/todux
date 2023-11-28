@@ -51,7 +51,7 @@ class Task(models.Model):
     tags = models.ManyToManyField(Tag, blank=True)
 
     class Meta():
-        ordering = ['done']
+        ordering = ['done','priority']
 
 
     def __str__(self):

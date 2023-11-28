@@ -18,4 +18,9 @@ urlpatterns = [
     path("create-project/", views.createProject, name="create-project"),
     path("delete-project/<int:pk>/", views.deleteProject, name="delete-project"),
 
+    path("create-tag/", views.createTag, name="create-tag"),
+    path("delete-tag/<int:pk>/", views.deleteTag, name="delete-tag"),
+    path("update-tag/<int:pk>/", views.updateTag, name="update-tag"),
+
+
 ]
