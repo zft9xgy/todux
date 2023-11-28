@@ -1,4 +1,5 @@
 from django.shortcuts import render,redirect, get_object_or_404
+from django.http import HttpResponse
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
@@ -9,8 +10,6 @@ from .forms import TaskForm
 
 @login_required(login_url='login')
 def home(request):
-    # s = request.GET.get('s')
-    # print(s)
     user = request.user
     tasks = user.task_set.all()
     tags = user.tag_set.all()
@@ -91,6 +90,10 @@ def inbox(request):
     return render(request,'base/inbox.html')
 
 
+
+# TASK CRUD
+
+
 @login_required(login_url='login')
 def addTask(request):
     form = TaskForm()
@@ -98,6 +101,7 @@ def addTask(request):
         form = TaskForm(request.POST)
         if form.is_valid():
             form.save()
+            print(request.POST)
             return redirect('home')
 
     context = {'form':form.as_p}
@@ -105,8 +109,12 @@ def addTask(request):
 
 @login_required(login_url='login')
 def updateTask(request,pk):
+
     task = Task.objects.get(id=pk)
     form = TaskForm(instance=task)
+
+    if request.user != task.owner:
+        return HttpResponse("You cant do that")
 
     if request.method == 'POST':
         form = TaskForm(request.POST,instance=task)
@@ -120,7 +128,9 @@ def updateTask(request,pk):
 @login_required(login_url='login')
 def deleteTask(request,pk):
     task = Task.objects.get(id=pk)
-    # form = TaskForm(instance=task)
+
+    if request.user != task.owner:
+        return HttpResponse("You cant do that")
 
     if request.method == 'POST':
         task.delete()
