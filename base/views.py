@@ -2,27 +2,31 @@ from django.shortcuts import render,redirect, get_object_or_404
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 from .models import Task,Project,Tag
 from .forms import TaskForm
 
+@login_required(login_url='login')
 def home(request):
     # s = request.GET.get('s')
     # print(s)
-    tasks = Task.objects.all()
-    tags = Tag.objects.all()
+    user = request.user
+    tasks = user.task_set.all()
+    tags = user.tag_set.all()
 
     projects = Project.objects.all()
     context = {'tasks':tasks,'projects':projects,'tags':tags}
     return render(request,'base/home.html',context)
 
 def loginPage(request):
+    page = "login"
 
     if request.user.is_authenticated:
         return redirect('home')
     
     if request.method == 'POST':
-        username = request.POST.get('username')
+        username = request.POST.get('username').lower()
         password = request.POST.get('password')
 
         try:
@@ -38,18 +42,40 @@ def loginPage(request):
         else:
             messages.error(request,"User or password is wrong!")
 
-    context = {}
+    context = {'page': page}
     return render(request,'base/users/login_register.html',context)
+
+def registerPage(request):
+    page = "register"
+    form = UserCreationForm()
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save(commit=False)
+            user.username = user.username.lower()
+            user.save()
+            login(request,user)
+            return redirect('home')
+        else:
+            messages.error(request,"Error en la creación del usuario.")
+
+    context = {'page':page,'form':form}
+    return render(request,'base/users/login_register.html',context)
+
 
 def logoutPage(request):
     logout(request)
     return redirect('home')
 
+@login_required(login_url='login')
 def project(request,pk):
     project = Project.objects.get(id=pk)
-    context = {'project':project}
+    # tasks = Task.objects.filter(project=pk)
+    tasks = project.task_set.all()
+    context = {'project':project,'tasks':tasks}
     return render(request,'base/project.html',context)
 
+@login_required(login_url='login')
 def tag(request,pk):
     
     tag = get_object_or_404(Tag, pk=pk)
@@ -60,6 +86,7 @@ def tag(request,pk):
     context = {'tasks': tasks}
     return render(request,'base/tag.html',context)
 
+@login_required(login_url='login')
 def inbox(request):
     return render(request,'base/inbox.html')
 

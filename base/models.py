@@ -22,6 +22,10 @@ class Project(models.Model):
 class Tag(models.Model):
     name = models.CharField(max_length=100)
 
+    # relational data
+    owner = models.ForeignKey(User, on_delete=models.CASCADE,null=True)
+
+
     def __str__(self):
         return self.name
 

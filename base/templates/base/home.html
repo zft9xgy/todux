@@ -28,7 +28,7 @@ Home
 
 <div style="border: 1px solid grey; width: 600px; margin: 10px; padding:10px;" >
     Id:{{task.id}} - Title: {{task.title}} - <input type="checkbox" name="done" {% if task.done %} checked {% endif %}> 
-    <div> <strong><a href="{% url 'update-task' task.id %}">Update</a></strong> | <a href="{% url 'delete-task' task.id %}" class=""> Delete</a></div>
+    <div> <strong><a href="{% url 'update-task' task.id %}">Edit</a></strong> | <a href="{% url 'delete-task' task.id %}" class=""> Delete</a></div>
 </div>
 
 {% endfor %}
