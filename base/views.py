@@ -98,7 +98,11 @@ def tag(request,pk):
 
 @login_required(login_url='login')
 def inbox(request):
-    return render(request,'base/inbox.html')
+    user = request.user
+    tasks = Task.objects.filter(owner=user, project__isnull=True)
+    
+    context = {'tasks': tasks}
+    return render(request,'base/inbox.html',context)
 
 
 
@@ -111,8 +115,9 @@ def addTask(request):
     if request.method == 'POST':
         form = TaskForm(request.POST)
         if form.is_valid():
-            form.save()
-            print(request.POST)
+            task = form.save(commit=False)
+            task.owner = request.user
+            task.save()
             return redirect('home')
 
     context = {'form':form.as_p}
@@ -149,8 +154,6 @@ def deleteTask(request,pk):
 
     context = {'obj':task}
     return render(request,'base/delete.html',context)
-
-
 
 
 # Project CRUD

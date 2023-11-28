@@ -7,6 +7,7 @@ class TaskForm(ModelForm):
     class Meta:
         model = Task
         fields = "__all__"
+        exclude = ['owner']
 
 class ProjectForm(ModelForm):
     class Meta:

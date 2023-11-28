@@ -46,7 +46,7 @@ class Task(models.Model):
     created = models.DateTimeField(auto_now_add=True)
 
     # relational
-    project = models.ForeignKey(Project, on_delete=models.CASCADE)
+    project = models.ForeignKey(Project, on_delete=models.CASCADE,null=True,blank=True)
     owner = models.ForeignKey(User, on_delete=models.CASCADE,null=True)
     tags = models.ManyToManyField(Tag, blank=True)
 
