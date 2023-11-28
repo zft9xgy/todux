@@ -25,7 +25,6 @@ class Tag(models.Model):
     # relational data
     owner = models.ForeignKey(User, on_delete=models.CASCADE,null=True)
 
-
     def __str__(self):
         return self.name
 
@@ -57,5 +56,5 @@ class Task(models.Model):
 
     def __str__(self):
         status = "Done" if self.done else "Not Done"
-        return f'Task {self.id}: {self.title} ({status}) [Project ID: {self.project_id}]'
+        return f'Owner: {self.owner} Task {self.id}: {self.title} - Description: {self.description} -({status}) [Project ID: {self.project_id}] - Tags[{self.tags} - ]'
 

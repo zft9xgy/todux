@@ -39,11 +39,14 @@ Home
 {% for project in projects %}
 
 <div>
-    Id:{{project.id}} - Title: <a href="{% url 'project' project.id %}">{{project.title}}</a>
+    Id:{{project.id}} - Title: <a href="{% url 'project' project.id %}">{{project.title}}</a>  |<div> <a href="{% url 'update-project' project.id %}">Edit</a> |  <a href="{% url 'delete-project' project.id %}" class=""> Delete</a></div>
     <p>{{project.description}}</p>
 </div>
 
 {% endfor %}
+<div>
+    <a href="{% url 'create-project' %}">Create new project</a>
+</div>
 </div>
 
 

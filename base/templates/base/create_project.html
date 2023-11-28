@@ -1,0 +1,17 @@
+{% extends 'main.html' %}
+
+{% block title %}
+Create new project
+{% endblock %}
+
+{% block content %}
+<div>
+    <div>
+        <form action="" method="post">
+            {% csrf_token %}
+            {{ form }}
+            <input type="submit" value="Crear proyecto">
+        </form>
+    </div>
+</div>
+{% endblock %}

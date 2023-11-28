@@ -6,7 +6,8 @@
 {% endblock %}
 
 {% block content %}
-<h1>{{ project.title }}!</h1>
+{% if request.user == project.owner %}
+<h1>{{ project.title }}</h1>
 <p>{{ project.description }}</p>
 <hr>
 <div>
@@ -20,4 +21,5 @@
 
 {% endfor %}
 </div>
+{% endif %}
 {% endblock %}

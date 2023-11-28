@@ -6,15 +6,16 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 from .models import Task,Project,Tag
-from .forms import TaskForm
+from .forms import TaskForm, ProjectForm
 
 @login_required(login_url='login')
 def home(request):
     user = request.user
+
     tasks = user.task_set.all()
     tags = user.tag_set.all()
+    projects = user.project_set.all()
 
-    projects = Project.objects.all()
     context = {'tasks':tasks,'projects':projects,'tags':tags}
     return render(request,'base/home.html',context)
 
@@ -61,23 +62,33 @@ def registerPage(request):
     context = {'page':page,'form':form}
     return render(request,'base/users/login_register.html',context)
 
-
 def logoutPage(request):
     logout(request)
     return redirect('home')
 
 @login_required(login_url='login')
 def project(request,pk):
-    project = Project.objects.get(id=pk)
+    user = request.user
+    #project = Project.objects.get(id=pk)
+    project = user.project_set.filter(id=pk).first()
+
+    if project is None:
+        return HttpResponse("Project not found or you don't have access to it!")
+
     # tasks = Task.objects.filter(project=pk)
     tasks = project.task_set.all()
+    
     context = {'project':project,'tasks':tasks}
     return render(request,'base/project.html',context)
 
 @login_required(login_url='login')
 def tag(request,pk):
     
-    tag = get_object_or_404(Tag, pk=pk)
+    user = request.user
+    tag = user.tag_set.filter(pk=pk).first()
+    # tag = get_object_or_404(Tag, pk=pk)
+    if project is None:
+        return HttpResponse("Tag not found or you don't have access to it!")
 
     # Obtén todas las tareas asociadas a la etiqueta
     tasks = Task.objects.filter(tags=tag)
@@ -138,3 +149,56 @@ def deleteTask(request,pk):
 
     context = {'obj':task}
     return render(request,'base/delete.html',context)
+
+
+
+
+# Project CRUD
+
+@login_required(login_url='login')
+def createProject(request):
+    user = request.user
+    form = ProjectForm()
+    if request.method == 'POST':
+        form = ProjectForm(request.POST)
+
+        if form.is_valid():
+            project = form.save(commit=False)
+            project.owner = user
+            project.save()
+            return redirect('project',pk=project.pk) 
+
+    context = {'form':form} 
+    return render(request,'base/create_project.html',context)
+
+@login_required(login_url='login')
+def deleteProject(request,pk):
+    project = Project.objects.get(id=pk)
+
+    if request.user != project.owner:
+        return HttpResponse("You cant do that")
+
+    if request.method == 'POST':
+        project.delete()
+        return redirect('home')
+
+    context = {'obj':project}
+    return render(request,'base/delete.html',context)
+
+@login_required(login_url='login')
+def updateProject(request,pk):
+
+    project = Project.objects.get(id=pk)
+    form = ProjectForm(instance=project)
+
+    if request.user != project.owner:
+        return HttpResponse("You cant do that")
+
+    if request.method == 'POST':
+        form = ProjectForm(request.POST,instance=project)
+        if form.is_valid():
+            form.save()
+            return redirect('home')
+
+    context = {'form':form.as_p}
+    return render(request,'base/add_task.html',context)
