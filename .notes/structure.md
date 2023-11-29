@@ -1,5 +1,5 @@
-index / - mostrar todos los proyectos con 5 ultimas tareas por cada proyecto
-inbox - todos los proyectos del inbox
-proyecto - pagina donde lista la tareas de cada proyecto
-todas las tareas - paginas listando todas las tareas
-todas las etiquetas
+index / - show all projects with 5 last tasks for each project
+inbox - all projects in the inbox
+project - page listing tasks for each project
+all tasks - pages listing all tasks
+all tags

@@ -1,26 +1,25 @@
-# Siguientes pasos
+# Next steps
 
-- realizar un CRUD para los modelos
-- tareas, crear, editar, eliminiar
-- proyecto
-- etiqeutas
-
-
-- actualmente on delete proyect, se eliminan todas las tareas asociadas a ese proyecto. Confirmar este comportamiento
+- make a CRUD for the models
+- tasks, create, edit, delete
+- project
+- tags
 
 
+- currently on delete project, all tasks associated with that project are deleted. Confirm this behaviour
 
-## Backlog
 
-- añadir capturadores de erorres y validacion de datos antes de guardar en base de datos.
-- creando una tarea dentro de un proyecto o etiqueta, por defecto la etiqueta debe ir asociada a ese proyecto o etiqueta. 
-- cuando se añade una tarea ya sea desde proyectos o tags, esta debe redirigir a la pagina donde se ha creado:
-ejemplo, dentro del proyecto personal, creo una tarea, esta debe redirigir a la pagina de proyecto personal.
 
+## Backlog
+
+- add error catchers and data validation before saving to database. 
+- creating a task within a project or tag, by default the tag must be associated to that project or tag (maybe it is handled by the frontend?).
+- when a task is added either from projects or tags, it should redirect to the page where it has been created:
+example, within the personal project, I create a task, it should redirect to the personal project page. (maybe it is handled by the frontend?)
 
 
 ## Done
 
 291123
-- no debe ser posible crear 2 tags con el mismo nombre
-- no debe ser posible crear 2 proyectos con el mismo nombre
+- it should not be possible to create 2 tags with the same name
+- it should not be possible to create 2 projects with the same name
