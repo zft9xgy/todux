@@ -25,3 +25,8 @@ https://www.youtube.com/@DennisIvy
 
 - list all the things I like about Todoist.
 - investigate other task apps. things 3, any.do, omnifocus
+
+
+## references
+
+https://www.django-rest-framework.org/tutorial/quickstart/
