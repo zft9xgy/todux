@@ -1,4 +1,44 @@
-body{
-    background-color: #212121;
+
+html{
+    background-color: #202123;
     color: white;
+    font-family: sans-serif;
+}
+
+body{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0;
+}
+
+header,
+main,
+footer{
+    flex: auto;
+    padding: 20px;
+}
+
+header{
+    background-color: #28292a;
+    width: 100%;
+}
+
+main{
+    max-width:800px;
+}
+
+footer{
+    width: 100%;
+}
+
+
+a,
+a:visited{
+    color: #d24726;
+}
+
+a:hover{
+    color: #992a0f;
 }

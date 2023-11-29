@@ -7,3 +7,7 @@
 
 
 - actualmente on delete proyect, se eliminan todas las tareas asociadas a ese proyecto. Confirmar este comportamiento
+
+
+
+## Backlog
