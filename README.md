@@ -5,6 +5,8 @@ The user-centred and community-driven to-do app.
 
 This project has been created to learn and polish skills with django and python. 
 
+Thanks to [Dennis Ivy](https://dennisivy.com/) for the incredible [django tutorial](https://youtu.be/PtQiiknWUcI?feature=shared) where i learn the basics to do my project  
+
 Strongly inspired by [todoist](https://todoist.com/).
 
 
