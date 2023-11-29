@@ -15,6 +15,10 @@ class Project(models.Model):
     # relational data
     owner = models.ForeignKey(User, on_delete=models.CASCADE,null=True)
 
+    class Meta:
+        # Agregar restricción única para la combinación de title y owner
+        unique_together = ['title', 'owner']
+
     def __str__(self):
         return f'Project {self.id}: {self.title}'
 
@@ -25,8 +29,14 @@ class Tag(models.Model):
     # relational data
     owner = models.ForeignKey(User, on_delete=models.CASCADE,null=True)
 
+    class Meta:
+        # Agregar restricción única para la combinación de name y owner
+        unique_together = ['name', 'owner']
+
     def __str__(self):
         return self.name
+
+        
 
 class Task(models.Model):
 
