@@ -100,11 +100,18 @@ def tag(request,pk):
 def inbox(request):
     user = request.user
     tasks = Task.objects.filter(owner=user, project__isnull=True)
-    
+
     context = {'tasks': tasks}
     return render(request,'base/inbox.html',context)
 
 
+@login_required(login_url='login')
+def userProfile(request):
+    user = request.user
+    user_object = get_object_or_404(User, username=user.username)
+    
+    context = {'user': user}
+    return render(request,'base/users/profile.html',context)
 
 # TASK CRUD
 
