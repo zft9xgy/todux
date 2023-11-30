@@ -17,6 +17,9 @@ Strongly inspired by [todoist](https://todoist.com/).
     - Projects 
     - Tags
 
+![model diagram](./misc/assets/todux-model-diagram.png "entity diagram like diagram")
+
+
 
 Each task can only be assigned to one project. Each task can have as many tags as you want. 
 
