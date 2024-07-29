@@ -1,0 +1,28 @@
+<div class="tasks-feed" id="tasks-feed-id">
+  {% for task in tasks %}
+
+  <div class="simple-task">
+    Task: {{task}} |
+    <button
+      hx-delete="/simple/delete/{{task.id}}"
+      hx-target="#tasks-feed-id"
+      hx-swap="outerHTML"
+    >
+      Eliminar
+    </button>
+  </div>
+
+  {% endfor %}
+  <!-- -->
+  <div class="simple-task">
+    <form
+      hx-post="/simple/create"
+      hx-target="#tasks-feed-id"
+      hx-swap="outerHTML"
+    >
+      <input type="text" name="title" id="" />
+      <button type="submit">Añadir tarea</button>
+    </form>
+  </div>
+  <!-- -->
+</div>

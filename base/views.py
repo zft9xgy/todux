@@ -5,8 +5,10 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
-from .models import Task,Project,Tag
-from .forms import TaskForm, ProjectForm, TagForm
+from .models import Task,Project,Tag,SimpleTask
+from .forms import TaskForm, ProjectForm, TagForm, SimpleTaskForm
+from django.views.decorators.http import require_GET, require_POST
+from django.views.decorators.http import require_http_methods
 
 @login_required(login_url='login')
 def home(request):
@@ -265,3 +267,39 @@ def updateTag(request,pk):
 
     context = {'form':form.as_p}
     return render(request,'base/tags/create_tag.html',context)
+
+
+
+# simple task
+def simple(request):
+   
+    tasks = SimpleTask.objects.all()
+
+    context = {'tasks':tasks}
+    return render(request,'base/simple.html',context)
+
+@require_POST
+def createSimpleTask(request):
+    form = SimpleTaskForm(request.POST)
+    if form.is_valid():
+        form.save()
+    
+    tasks = SimpleTask.objects.all()
+
+    context = {'tasks':tasks}
+    return render(request,'base/simple/task_list.html',context)
+
+@require_http_methods(['DELETE'])
+def deleteSimpleTask(request,id):
+    
+    task = get_object_or_404(SimpleTask,id=id)
+    task.delete()
+   
+    tasks = SimpleTask.objects.all()
+
+    context = {'tasks':tasks}
+    return render(request,'base/simple/task_list.html',context)
+
+    
+
+

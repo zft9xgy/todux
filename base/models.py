@@ -68,3 +68,11 @@ class Task(models.Model):
         status = "Done" if self.done else "Not Done"
         return f'Owner: {self.owner} Task {self.id}: {self.title} - Description: {self.description} -({status}) [Project ID: {self.project_id}] - Tags[{self.tags} - ]'
 
+
+class SimpleTask(models.Model):
+    # item data
+    title = models.CharField(max_length=500)
+    done = models.BooleanField(default=False)
+
+    def __str__(self):
+        return f'{self.title} - Done:{self.done}' 

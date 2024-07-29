@@ -1,0 +1,25 @@
+{% extends 'main.html' %} {% block title %} Simple {% endblock %}
+<!---->
+{% block content %}
+<h1>Todux</h1>
+<p>the user-centred and community-driven to-do app.</p>
+
+<style>
+  .tasks {
+    border: 1px solid red;
+  }
+  .simple-task {
+    border: 1px solid green;
+    padding: 10px 0px;
+    margin: 5px 0;
+  }
+</style>
+
+<div class="tasks">
+  <h2>Tasks</h2>
+
+  {% include 'base/simple/task_list.html' %}
+</div>
+
+<!---->
+{% endblock %}

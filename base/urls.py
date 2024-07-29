@@ -23,5 +23,10 @@ urlpatterns = [
     path("delete-tag/<int:pk>/", views.deleteTag, name="delete-tag"),
     path("update-tag/<int:pk>/", views.updateTag, name="update-tag"),
 
+    path("simple/", views.simple, name="simple"),
+    path("simple/create", views.createSimpleTask, name="simple-create"),
+    path("simple/delete/<str:id>", views.deleteSimpleTask, name="simple-delete"),
+    
+
 
 ]
