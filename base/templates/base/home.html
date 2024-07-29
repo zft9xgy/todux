@@ -1,54 +1,21 @@
-{% extends 'main.html' %}
-
-
-{% block title %}
-Home
-{% endblock %}
-
+{% extends 'main.html' %} {% block title %} Home {% endblock %}
+<!---->
 {% block content %}
-<h1>Todux</h1>
-<p>the user-centred and community-driven to-do app.</p>
-
 <div>
-    <style>
-        .li{
-            display: inline-block;
-        }
-    </style>
-    <h2>Tags</h2>
-    <strong><a href="{% url 'create-tag' %}">Create new tag</a></strong>
-    {% for tag in tags %}
-    <li><a href="{% url 'tag' tag.pk %}">#{{tag}}</a>[<a href="{% url 'update-tag' tag.pk %}">Edit</a> | <a href="{% url 'delete-tag' tag.pk %}">Delete</a>]</li> 
-    {% endfor %}
-</div>
+  <h2>Tasks</h2>
+  <strong><a href="{% url 'add-task' %}">Add new task</a></strong>
+  {% for task in tasks %}
 
-<div>
-    <h2>Tasks</h2>
-    <strong><a href="{% url 'add-task' %}">Add new task</a></strong>
-{% for task in  tasks %}
+  <div>
+    Id:{{task.id}} - Title: {{task.title}} -
+    <input type="checkbox" name="done" {% if task.done %} checked {% endif %} />
+    <div>
+      <strong><a href="{% url 'update-task' task.id %}">Edit</a></strong> |
+      <a href="{% url 'delete-task' task.id %}" class=""> Delete</a>
+    </div>
+  </div>
 
-<div style="border: 1px solid grey; width: 600px; margin: 10px; padding:10px;" >
-    Id:{{task.id}} - Title: {{task.title}} - <input type="checkbox" name="done" {% if task.done %} checked {% endif %}> 
-    <div> <strong><a href="{% url 'update-task' task.id %}">Edit</a></strong> | <a href="{% url 'delete-task' task.id %}" class=""> Delete</a></div>
+  {% endfor %}
 </div>
-
-{% endfor %}
-</div>
-<hr>
-<div>
-    <h2>Projects</h2>
-{% for project in projects %}
-
-<div>
-    Id:{{project.id}} - Title: <a href="{% url 'project' project.id %}">{{project.title}}</a>  | <div> <a href="{% url 'update-project' project.id %}">Edit</a> |  <a href="{% url 'delete-project' project.id %}" class=""> Delete</a></div>
-    <p>{{project.description}}</p>
-</div>
-
-{% endfor %}
-<div>
-    <a href="{% url 'create-project' %}">Create new project</a>
-</div>
-</div>
-
 
 {% endblock %}

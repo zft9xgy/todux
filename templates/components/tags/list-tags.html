@@ -1,0 +1,21 @@
+<div class="tags-wrapper sidebar-section" id="list-tags">
+  <div class="sidebar-title-section tags-title-section" id="tag">
+    <h2>Tags</h2>
+    <button
+      class="pointer"
+      hx-get="{% url 'tag-create' %}"
+      hx-target="closest div"
+      hx-swap="innerHTML"
+    >
+      New tag
+    </button>
+  </div>
+
+  <div class="tags-list">
+    {% for tag in tags %}
+    <!---->
+    {% include 'components/tags/single-tag.html' %}
+    <!---->
+    {% endfor %}
+  </div>
+</div>

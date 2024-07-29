@@ -1,0 +1,13 @@
+<div class="simple-tag">
+  <form>
+    <input type="text" name="name" id="" placeholder="Enter your tag" />
+    <button
+      class="pointer"
+      hx-post="{% url 'tag-create' %}"
+      hx-target="#list-tags"
+      hx-swap="outerHTML"
+    >
+      Create
+    </button>
+  </form>
+</div>

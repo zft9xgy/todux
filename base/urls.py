@@ -30,6 +30,13 @@ urlpatterns = [
     path("simple/edit/<str:id>", views.editSimpleTask, name="simple-edit"),
     path("simple/check/<str:id>", views.checkSimpleTask, name="simple-check"),
 
+    # tag htmx
+    path("tag/get/", views.getEditableTagHx, name="tag-get"),
+    path("tag/create/", views.createTagHx, name="tag-create"),
+    path("tag/delete/<str:id>", views.deleteTagHx, name="tag-delete"),
+    path("tag/update/<str:id>", views.updateTagHx, name="tag-update"),
+
+
     
 
 

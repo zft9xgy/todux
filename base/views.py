@@ -270,7 +270,7 @@ def updateTag(request,pk):
 
 
 
-# simple task
+# simple task htmx
 def simple(request):
    
     tasks = SimpleTask.objects.all()
@@ -329,5 +329,73 @@ def checkSimpleTask(request,id):
     return render(request,'base/simple/simple-task.html',context)
 
     
+
+
+# tag crud htmx
+
+def getEditableTagHx(request,id):
+    """
+    Get current tag and return a edit-tag form.
+    """
+
+    tag = get_object_or_404(Tag,id=id)
+    context = {'tag':tag}
+    return render(request,'components/tags/single-tag-edit.html',context)
+
+@require_http_methods(['POST','GET'])
+def createTagHx(request):
+
+    if request.method == 'GET':
+        return render(request,'components/tags/single-tag-empty-form.html')
+
+    if request.method == 'POST':
+        form = TagForm(request.POST)
+        if form.is_valid():
+            
+            tag = form.save(commit=False)
+            tag.owner = request.user
+            tag.save()
+
+            tags = Tag.objects.all()
+            context = {'tags':tags} 
+            return render(request,'components/tags/list-tags.html',context)
+
+
+@require_http_methods(['POST'])
+def deleteTagHx(request,id):
+    tag = Tag.objects.get(id=id)
+
+    if request.user != tag.owner:
+        return HttpResponse("You cant do that")
+
+    if request.method == 'POST':
+        tag.delete()
+
+        tags = Tag.objects.all()
+        context = {'tags':tags} 
+        return render(request,'components/tags/list-tags.html',context)
+
+@require_http_methods(['POST','GET'])
+def updateTagHx(request,id):
+
+    tag = get_object_or_404(Tag,id=id)
+
+    if request.user != tag.owner:
+        return HttpResponse("You cant do that")
+
+    
+    if request.method == 'GET':
+        context = {'tag':tag}
+        return render(request,'components/tags/single-tag-edit.html',context)
+
+    if request.method == 'POST':
+        print('dentrod e tag form')
+        form = TagForm(request.POST,instance=tag)
+        if form.is_valid():
+            form.save()
+
+            tags = Tag.objects.all()
+            context = {'tags':tags} 
+            return render(request,'components/tags/list-tags.html',context)
 
 
