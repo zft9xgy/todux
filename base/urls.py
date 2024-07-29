@@ -26,6 +26,10 @@ urlpatterns = [
     path("simple/", views.simple, name="simple"),
     path("simple/create", views.createSimpleTask, name="simple-create"),
     path("simple/delete/<str:id>", views.deleteSimpleTask, name="simple-delete"),
+    path("simple/get/<str:id>", views.getSimpleTask, name="simple-get"),
+    path("simple/edit/<str:id>", views.editSimpleTask, name="simple-edit"),
+    path("simple/check/<str:id>", views.checkSimpleTask, name="simple-check"),
+
     
 
 
