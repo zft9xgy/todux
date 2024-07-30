@@ -399,3 +399,71 @@ def updateTagHx(request,id):
             return render(request,'components/tags/list-tags.html',context)
 
 
+# project crud htmx
+
+def getEditableProjectHx(request,id):
+    """
+    Get current project and return a edit-project form.
+    """
+
+    project = get_object_or_404(Project,id=id)
+    context = {'project':project}
+    return render(request,'components/projects/single-project-edit.html',context)
+
+@require_http_methods(['POST','GET'])
+def createProjectHx(request):
+
+    if request.method == 'GET':
+        return render(request,'components/projects/single-project-empty-form.html')
+
+    if request.method == 'POST':
+        form = ProjectForm(request.POST)
+        if form.is_valid():
+            
+            project = form.save(commit=False)
+            project.owner = request.user
+            project.save()
+
+            projects = Project.objects.all()
+            context = {'projects':projects} 
+            return render(request,'components/projects/list-projects.html',context)
+
+
+@require_http_methods(['DELETE'])
+def deleteProjectHx(request,id):
+    project = Project.objects.get(id=id)
+
+    if request.user != project.owner:
+        return HttpResponse("You cant do that")
+
+    if request.method == 'DELETE':
+        project.delete()
+
+        projects = Project.objects.all()
+        context = {'projects':projects} 
+        return render(request,'components/projects/list-projects.html',context)
+
+@require_http_methods(['POST','GET'])
+def updateProjectHx(request,id):
+
+    project = get_object_or_404(Project,id=id)
+
+    if request.user != project.owner:
+        return HttpResponse("You cant do that")
+
+    
+    if request.method == 'GET':
+        context = {'project':project}
+        return render(request,'components/projects/single-project-edit.html',context)
+
+    if request.method == 'POST':
+        form = ProjectForm(request.POST,instance=project)
+        if form.is_valid():
+            form.save()
+
+            projects = Project.objects.all()
+            context = {'projects':projects} 
+            return render(request,'components/projects/list-projects.html',context)
+
+
+

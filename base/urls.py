@@ -36,6 +36,12 @@ urlpatterns = [
     path("tag/delete/<str:id>", views.deleteTagHx, name="tag-delete"),
     path("tag/update/<str:id>", views.updateTagHx, name="tag-update"),
 
+    # project htmx
+    path("project/get/", views.getEditableProjectHx, name="project-get"),
+    path("project/create/", views.createProjectHx, name="project-create"),
+    path("project/delete/<str:id>", views.deleteProjectHx, name="project-delete"),
+    path("project/update/<str:id>", views.updateProjectHx, name="project-update"),
+
 
     
 

@@ -1,19 +1,24 @@
 <div class="tag" id="tag-{{tag.id}}">
-  <a href="{% url 'tag' tag.id %}">#{{tag}}</a>
-  [<a
-    class="pointer"
-    hx-get="{% url 'tag-update' tag.id %}"
-    hx-target="#tag-{{tag.id}}"
-    hx-swap="outerHTML"
-    >Edit</a
-  >
-  |
-  <a
-    class="pointer"
-    hx-post="{% url 'tag-delete' tag.id %}"
-    hx-target="#list-tags"
-    hx-swap="outerHTML"
-    hx-confirm="Are you sure?"
-    >Delete</a
-  >]
+  <div class="tag-meta">({{tag.task_set.all.count}})</div>
+  <div class="tag-name">
+    <a href="{% url 'tag' tag.id %}">#{{tag}}</a>
+  </div>
+  <div class="tag-control">
+    [<a
+      class="pointer"
+      hx-get="{% url 'tag-update' tag.id %}"
+      hx-target="#tag-{{tag.id}}"
+      hx-swap="outerHTML"
+      >Edit</a
+    >
+    |
+    <a
+      class="pointer"
+      hx-post="{% url 'tag-delete' tag.id %}"
+      hx-target="#list-tags"
+      hx-swap="outerHTML"
+      hx-confirm="Are you sure?"
+      >Delete</a
+    >]
+  </div>
 </div>

@@ -16,6 +16,15 @@ html {
   color: var(--color-font-main);
 }
 
+/* principal structura */
+/* 
+body
+- header
+- .hero-wrapper
+- .app-wrapper
+- footer 
+*/
+
 body {
   background-color: var(--color-body-bg);
   display: flex;
@@ -37,15 +46,26 @@ header .header-menu {
   gap: 1rem;
 }
 
-.app-wrapper {
-  flex-grow: 1;
-}
+/* estructura */
+/* 
+.app-wrapper
+- aside
+- main 
+*/
 
-.app-wrapper,
 .hero-wrapper {
   align-self: center;
   width: var(--width-main);
   display: flex;
+  gap: 2rem;
+}
+
+.app-wrapper {
+  align-self: center;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: row;
+  min-width: var(--width-main);
   gap: 2rem;
 }
 
@@ -57,12 +77,12 @@ header .header-menu {
 }
 
 .app-wrapper aside {
-  flex-grow: 1;
+  flex: 1;
   padding: 1rem;
 }
 
 .app-wrapper main {
-  flex-grow: 6;
+  flex: 2;
   padding: 1rem;
 }
 
@@ -100,4 +120,46 @@ a:hover {
 
 input[type="text"] {
   /* line-height: 2rem; */
+}
+
+/* tag  */
+
+.tag {
+  display: flex;
+  align-items: baseline;
+}
+
+.tag .tag-name {
+  padding: 0.315rem;
+}
+
+.tag .tag-control {
+  flex-grow: 1;
+  text-align: right;
+}
+
+.tag .tag-meta {
+  opacity: 0.5;
+  font-size: 0.9rem;
+}
+
+/* project */
+
+.project {
+  display: flex;
+  align-items: baseline;
+}
+
+.project .project-title {
+  padding: 0.315rem;
+}
+
+.project .project-control {
+  flex-grow: 1;
+  text-align: right;
+}
+
+.project .project-meta {
+  opacity: 0.5;
+  font-size: 0.9rem;
 }

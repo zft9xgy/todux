@@ -1,0 +1,24 @@
+<div class="project" id="project-{{project.id}}">
+  <div class="project-meta">({{project.task_set.all.count}})</div>
+  <div class="project-title">
+    <a href="{% url 'project' project.id %}">@{{project.title}}</a>
+  </div>
+  <div class="project-control">
+    [<a
+      hx-get="{% url 'project-update' project.id %}"
+      hx-target="#project-{{project.id}}"
+      hx-swap="outerHTML"
+      class="pointer"
+      >Edit</a
+    >
+    |
+    <a
+      hx-delete="{% url 'project-delete' project.id %}"
+      hx-target="#list-projects"
+      hx-swap="outerHTML"
+      class="pointer"
+    >
+      Delete</a
+    >]
+  </div>
+</div>
