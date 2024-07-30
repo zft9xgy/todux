@@ -9,6 +9,7 @@ urlpatterns = [
     path("register/",views.registerPage,name="register"),
     path("logout/",views.logoutPage,name="logout"),
     path("inbox/", views.inbox, name="inbox"),
+    
     path("project/<int:pk>/", views.project, name="project"),
     path("tag/<int:pk>/", views.tag, name="tag"),
     path("add-task/",views.addTask, name="add-task"),
