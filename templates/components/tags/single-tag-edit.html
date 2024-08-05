@@ -1,13 +1,13 @@
 <div class="simple-tag" id="tag-{{tag.id}}">
   <form>
-    <input type="text" name="name" id="" value="{{tag.name}}" />
-    <button
+    <input type="text" name="name" id="" value="{{tag.name}}" autofocus />
+    <a
       class="pointer"
       hx-post="{% url 'tag-update' tag.id %}"
       hx-target="#list-tags"
       hx-swap="outerHTML"
     >
-      Editar
-    </button>
+      Edit
+    </a>
   </form>
 </div>

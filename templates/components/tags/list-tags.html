@@ -1,14 +1,14 @@
 <div class="tags-wrapper sidebar-section" id="list-tags">
   <div class="sidebar-title-section tags-title-section" id="tag">
     <h2>Tags</h2>
-    <button
+    <a
       class="pointer"
       hx-get="{% url 'tag-create' %}"
       hx-target="closest div"
       hx-swap="innerHTML"
     >
       New tag
-    </button>
+    </a>
   </div>
 
   <div class="tags-list">

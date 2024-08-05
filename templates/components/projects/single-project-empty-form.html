@@ -1,7 +1,13 @@
 <div class="simple-project" id="project-{{project.id}}">
   <form>
-    <input type="text" name="title" id="" placeholder="Project title..." />
-    <button
+    <input
+      type="text"
+      name="title"
+      id=""
+      placeholder="Project title..."
+      autofocus
+    />
+    <a
       class="pointer"
       hx-post="{% url 'project-create' %}"
       hx-target="#list-projects"
@@ -9,6 +15,6 @@
       type="submit"
     >
       Add
-    </button>
+    </a>
   </form>
 </div>

@@ -1,7 +1,13 @@
 <div class="simple-tag">
   <form>
-    <input type="text" name="name" id="" placeholder="Enter your tag" />
-    <button
+    <input
+      type="text"
+      name="name"
+      id=""
+      placeholder="Enter your tag"
+      autofocus
+    />
+    <a
       class="pointer"
       hx-post="{% url 'tag-create' %}"
       hx-target="#list-tags"
@@ -9,6 +15,6 @@
       type="submit"
     >
       Create
-    </button>
+    </a>
   </form>
 </div>
