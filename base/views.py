@@ -5,8 +5,8 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
-from .models import Task,Project,Tag,SimpleTask
-from .forms import TaskForm, ProjectForm, TagForm, SimpleTaskForm
+from .models import Task,Project,Tag
+from .forms import TaskForm, ProjectForm, TagForm
 from django.views.decorators.http import require_GET, require_POST
 from django.views.decorators.http import require_http_methods
 
@@ -270,63 +270,63 @@ def updateTag(request,pk):
 
 
 
-# simple task htmx
-def simple(request):
+# # simple task htmx
+# def simple(request):
    
-    tasks = SimpleTask.objects.all()
+#     tasks = SimpleTask.objects.all()
 
-    context = {'tasks':tasks}
-    return render(request,'base/simple.html',context)
+#     context = {'tasks':tasks}
+#     return render(request,'base/simple.html',context)
 
-@require_GET
-def getSimpleTask(request,id):
-    task = get_object_or_404(SimpleTask,id=id)
-    context = {'task':task}
-    return render(request,'base/simple/edit-task.html',context)
+# @require_GET
+# def getSimpleTask(request,id):
+#     task = get_object_or_404(SimpleTask,id=id)
+#     context = {'task':task}
+#     return render(request,'base/simple/edit-task.html',context)
 
-@require_POST
-def createSimpleTask(request):
-    form = SimpleTaskForm(request.POST)
-    if form.is_valid():
-        form.save()
+# @require_POST
+# def createSimpleTask(request):
+#     form = SimpleTaskForm(request.POST)
+#     if form.is_valid():
+#         form.save()
     
-    tasks = SimpleTask.objects.all()
+#     tasks = SimpleTask.objects.all()
 
-    context = {'tasks':tasks}
-    return render(request,'base/simple/task_list.html',context)
+#     context = {'tasks':tasks}
+#     return render(request,'base/simple/task_list.html',context)
 
-@require_http_methods(['DELETE'])
-def deleteSimpleTask(request,id):
+# @require_http_methods(['DELETE'])
+# def deleteSimpleTask(request,id):
     
-    task = get_object_or_404(SimpleTask,id=id)
-    task.delete()
+#     task = get_object_or_404(SimpleTask,id=id)
+#     task.delete()
    
-    tasks = SimpleTask.objects.all()
+#     tasks = SimpleTask.objects.all()
 
-    context = {'tasks':tasks}
-    return render(request,'base/simple/task_list.html',context)
+#     context = {'tasks':tasks}
+#     return render(request,'base/simple/task_list.html',context)
 
-@require_POST
-def editSimpleTask(request,id):
-    task = get_object_or_404(SimpleTask,id=id)
-    form = SimpleTaskForm(request.POST,instance=task)
-    if form.is_valid():
-        form.save()
+# @require_POST
+# def editSimpleTask(request,id):
+#     task = get_object_or_404(SimpleTask,id=id)
+#     form = SimpleTaskForm(request.POST,instance=task)
+#     if form.is_valid():
+#         form.save()
    
-    tasks = SimpleTask.objects.all()
+#     tasks = SimpleTask.objects.all()
 
-    context = {'tasks':tasks}
-    return render(request,'base/simple/task_list.html',context)
+#     context = {'tasks':tasks}
+#     return render(request,'base/simple/task_list.html',context)
 
-@require_POST
-def checkSimpleTask(request,id):
+# @require_POST
+# def checkSimpleTask(request,id):
 
-    task = get_object_or_404(SimpleTask,id=id)
-    task.done = not task.done
-    task.save()
+#     task = get_object_or_404(SimpleTask,id=id)
+#     task.done = not task.done
+#     task.save()
    
-    context = {'task':task}
-    return render(request,'base/simple/simple-task.html',context)
+#     context = {'task':task}
+#     return render(request,'base/simple/simple-task.html',context)
 
     
 
@@ -466,4 +466,48 @@ def updateProjectHx(request,id):
             return render(request,'components/projects/list-projects.html',context)
 
 
+# task crud htmx
 
+def getEditableTaskHx(request,id):
+    task = get_object_or_404(Task,id=id)
+    context = {'task':task}
+    
+    return render(request,'components/tasks/single-task-empty-form.html',context)
+
+@require_http_methods(['POST','GET'])
+def createTaskHx(request):
+
+    if request.method == 'GET':
+        return render(request,'components/tasks/single-task-empty-form.html')
+
+    if request.method == 'POST':
+        form = ProjectForm(request.POST)
+        if form.is_valid():
+            
+            project = form.save(commit=False)
+            project.owner = request.user
+            project.save()
+
+            projects = Project.objects.all()
+            context = {'projects':projects} 
+            return render(request,'components/projects/list-projects.html',context)
+
+@require_http_methods(['DELETE'])
+def deleteTaskHx(request,id):
+    pass
+
+@require_http_methods(['POST','GET'])
+def updateTaskHx(request,id):
+    pass
+
+
+@require_POST
+def checkTask(request,id):
+
+    task = get_object_or_404(Task,id=id)
+    task.done = not task.done
+    task.save()
+   
+    tasks = Task.objects.all()
+    context = {'tasks':tasks} 
+    return render(request,'components/tasks/list-tasks.html',context)

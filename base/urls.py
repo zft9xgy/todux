@@ -24,12 +24,6 @@ urlpatterns = [
     path("delete-tag/<int:pk>/", views.deleteTag, name="delete-tag"),
     path("update-tag/<int:pk>/", views.updateTag, name="update-tag"),
 
-    path("simple/", views.simple, name="simple"),
-    path("simple/create", views.createSimpleTask, name="simple-create"),
-    path("simple/delete/<str:id>", views.deleteSimpleTask, name="simple-delete"),
-    path("simple/get/<str:id>", views.getSimpleTask, name="simple-get"),
-    path("simple/edit/<str:id>", views.editSimpleTask, name="simple-edit"),
-    path("simple/check/<str:id>", views.checkSimpleTask, name="simple-check"),
 
     # tag htmx
     path("tag/get/", views.getEditableTagHx, name="tag-get"),
@@ -42,6 +36,13 @@ urlpatterns = [
     path("project/create/", views.createProjectHx, name="project-create"),
     path("project/delete/<str:id>", views.deleteProjectHx, name="project-delete"),
     path("project/update/<str:id>", views.updateProjectHx, name="project-update"),
+
+    # task htmx
+    path("task/get/<str:id>", views.getEditableTaskHx, name="task-get"),
+    path("task/create/", views.createTaskHx, name="task-create"),
+    path("task/delete/<str:id>", views.deleteTaskHx, name="task-delete"),
+    path("task/update/<str:id>", views.updateTaskHx, name="task-update"),
+    path("task/check/<str:id>", views.checkTask, name="task-check"),
 
 
     

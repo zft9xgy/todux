@@ -1,21 +1,7 @@
 {% extends 'main.html' %} {% block title %} Home {% endblock %}
 <!---->
 {% block content %}
-<div>
-  <h2>Tasks</h2>
-  <strong><a href="{% url 'add-task' %}">Add new task</a></strong>
-  {% for task in tasks %}
-
-  <div>
-    Id:{{task.id}} - Title: {{task.title}} -
-    <input type="checkbox" name="done" {% if task.done %} checked {% endif %} />
-    <div>
-      <strong><a href="{% url 'update-task' task.id %}">Edit</a></strong> |
-      <a href="{% url 'delete-task' task.id %}" class=""> Delete</a>
-    </div>
-  </div>
-
-  {% endfor %}
-</div>
-
+<!---->
+{% include 'components/tasks/list-tasks.html' %}
+<!---->
 {% endblock %}

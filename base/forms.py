@@ -1,5 +1,5 @@
 from django.forms import ModelForm
-from .models import Task, Project, Tag, SimpleTask
+from .models import Task, Project, Tag
 
 
 class TaskForm(ModelForm):
@@ -8,6 +8,12 @@ class TaskForm(ModelForm):
         model = Task
         fields = "__all__"
         exclude = ['owner']
+
+class TaskFormHtmx(ModelForm):
+
+    class Meta:
+        model = Task
+        fields = ['title']
 
 class ProjectForm(ModelForm):
     class Meta:
@@ -21,9 +27,3 @@ class TagForm(ModelForm):
         fields = ['name']
 
 
-class SimpleTaskForm(ModelForm):
-
-    class Meta:
-        model = SimpleTask
-        fields = "__all__"
-        exclude = ['done']

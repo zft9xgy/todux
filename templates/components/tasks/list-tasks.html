@@ -1,0 +1,22 @@
+<div class="tasks-wrapper main-section" id="list-tasks">
+  <div class="main-title-section tasks-title-section" id="task">
+    <h2>Tasks</h2>
+    <a
+      class="pointer"
+      hx-get="{% url 'task-create' %}"
+      hx-target="closest div"
+      hx-swap="innerHTML"
+    >
+      New task
+    </a>
+  </div>
+  <div class="tasks-feed" id="tasks-feed-id">
+    {% for task in tasks %}
+    <!-- -->
+    {% include 'components/tasks/single-task.html' %}
+
+    <!-- -->
+    {% endfor %}
+    <!-- -->
+  </div>
+</div>

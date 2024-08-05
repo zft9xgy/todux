@@ -1,0 +1,45 @@
+<div class="task" id="task-{{task.id}}">
+  <div class="task-check">
+    {% if task.done %}
+    <i
+      hx-post="{% url 'task-check' task.id %}"
+      hx-target="#list-tasks"
+      hx-swap="outerHTML"
+      style="color: white"
+      class="fa-solid fa-circle-check"
+    ></i>
+    {% else %}
+    <i
+      hx-post="{% url 'task-check' task.id %}"
+      hx-target="#list-tasks"
+      hx-swap="outerHTML"
+      class="fa-regular fa-circle-check"
+    ></i>
+    {% endif %}
+  </div>
+
+  {% if task.done %}
+  <div class="task-title" style="text-decoration: line-through">
+    Task: {{task.title}}
+  </div>
+  {% else %}
+  <div class="task-title">Task: {{task.title}}</div>
+  {% endif %}
+
+  <div class="task-control">
+    <i
+      class="fa-solid fa-trash"
+      hx-delete="{% url 'task-delete' task.id %}"
+      hx-confirm="Are you sure you wish to delete this task?"
+      hx-target="#tasks-feed-id"
+      hx-swap="outerHTML"
+    >
+    </i>
+    <i
+      class="fa-solid fa-pen-to-square"
+      hx-get="{% url 'task-get' task.id %}"
+      hx-target="#task-{{task.id}}"
+      hx-swap="outerHTML"
+    ></i>
+  </div>
+</div>
