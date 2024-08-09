@@ -494,7 +494,17 @@ def createTaskHx(request):
 
 @require_http_methods(['DELETE'])
 def deleteTaskHx(request,id):
-    pass
+    task = Task.objects.get(id=id)
+
+    if request.user != task.owner:
+        return HttpResponse("You cant do that")
+
+    if request.method == 'DELETE':
+        task.delete()
+
+        tasks = Task.objects.all()
+        context = {'tasks':tasks} 
+        return render(request,'components/tasks/list-tasks.html',context)
 
 @require_http_methods(['POST','GET'])
 def updateTaskHx(request,id):
