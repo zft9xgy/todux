@@ -197,3 +197,26 @@ input[type="text"] {
 .task-form input[type="text"]:focus {
   border: 1px solid var(--color-accent);
 }
+
+/*  */
+
+.simple-task,
+.simple-tag,
+.simple-project {
+  width: 100%;
+}
+
+.simple-task form,
+.simple-tag form,
+.simple-project form {
+  display: flex;
+  gap: 1rem;
+  height: 2rem;
+  justify-content: space-between;
+}
+
+.simple-task form input[type="text"],
+.simple-tag form input[type="text"],
+.simple-project form input[type="text"] {
+  width: 100%;
+}

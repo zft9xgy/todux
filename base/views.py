@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 from .models import Task,Project,Tag
-from .forms import TaskForm, ProjectForm, TagForm
+from .forms import TaskForm, ProjectForm, TagForm, TaskFormHtmx
 from django.views.decorators.http import require_GET, require_POST
 from django.views.decorators.http import require_http_methods
 
@@ -481,16 +481,16 @@ def createTaskHx(request):
         return render(request,'components/tasks/single-task-empty-form.html')
 
     if request.method == 'POST':
-        form = ProjectForm(request.POST)
+        form = TaskFormHtmx(request.POST)
         if form.is_valid():
             
-            project = form.save(commit=False)
-            project.owner = request.user
-            project.save()
+            task = form.save(commit=False)
+            task.owner = request.user
+            task.save()
 
-            projects = Project.objects.all()
-            context = {'projects':projects} 
-            return render(request,'components/projects/list-projects.html',context)
+            tasks = Task.objects.all()
+            context = {'tasks':tasks} 
+            return render(request,'components/tasks/list-tasks.html',context)
 
 @require_http_methods(['DELETE'])
 def deleteTaskHx(request,id):

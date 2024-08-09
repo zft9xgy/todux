@@ -1,10 +1,10 @@
-<div class="task-form">
+<div class="simple-task">
   <form
     hx-post="{% url 'task-create' %}"
-    hx-target="#tasks-feed-id"
+    hx-target="#list-tasks"
     hx-swap="outerHTML"
   >
-    <input type="text" name="title" id="" />
-    <a class="pointer" type="submit">Add task</a>
+    <input type="text" name="title" id="" autofocus />
+    <button class="pointer" type="submit">Add task</button>
   </form>
 </div>

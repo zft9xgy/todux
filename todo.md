@@ -3,3 +3,5 @@
 - Controlar que no pueda editarse mas de dos elementos a la vez. Quiero decir, que cuando cliques en editar y clieques en otro editar, se cierre el primero y pregunte si quieres guardar. como aqui: https://htmx.org/examples/edit-row/
 
 - Cuando se crea una eituqeta desde el sidebar, controlar que se pueda cancelar una vez se clica el boton. Con ESC o clicando fuera.
+
+- Aplicar un mejore estilo a los inputs https://codepen.io/lucasyem/pen/ZEEYKdj

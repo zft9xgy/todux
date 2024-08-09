@@ -1,5 +1,7 @@
 <div class="simple-project" id="project-{{project.id}}">
-  <form>
+  <form hx-post="{% url 'project-create' %}"
+  hx-target="#list-projects"
+  hx-swap="outerHTML">
     <input
       type="text"
       name="title"
@@ -7,14 +9,11 @@
       placeholder="Project title..."
       autofocus
     />
-    <a
+    <button
       class="pointer"
-      hx-post="{% url 'project-create' %}"
-      hx-target="#list-projects"
-      hx-swap="outerHTML"
       type="submit"
     >
       Add
-    </a>
+    </button>
   </form>
 </div>
