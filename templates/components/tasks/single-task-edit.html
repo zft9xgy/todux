@@ -1,0 +1,10 @@
+<div class="simple-task">
+  <form
+    hx-post="{% url 'task-update' task.id %}"
+    hx-target="#list-tasks"
+    hx-swap="outerHTML"
+  >
+    <input autofocus type="text" name="title" id="" value="{{task.title}}" />
+    <button class="pointer" type="submit">Edit task</button>
+  </form>
+</div>

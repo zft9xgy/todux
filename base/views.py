@@ -508,7 +508,24 @@ def deleteTaskHx(request,id):
 
 @require_http_methods(['POST','GET'])
 def updateTaskHx(request,id):
-    pass
+    task = get_object_or_404(Task,id=id)
+
+    if request.user != task.owner:
+        return HttpResponse("You cant do that")
+
+    
+    if request.method == 'GET':
+        context = {'task':task}
+        return render(request,'components/tasks/single-task-edit.html',context)
+
+    if request.method == 'POST':
+        form = TaskFormHtmx(request.POST,instance=task)
+        if form.is_valid():
+            form.save()
+
+            tasks = Task.objects.all()
+            context = {'tasks':tasks} 
+            return render(request,'components/tasks/list-tasks.html',context)
 
 
 @require_POST

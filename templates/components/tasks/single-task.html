@@ -36,7 +36,7 @@
     </i>
     <i
       class="fa-solid fa-pen-to-square"
-      hx-get="{% url 'task-get' task.id %}"
+      hx-get="{% url 'task-update' task.id %}"
       hx-target="#task-{{task.id}}"
       hx-swap="outerHTML"
     ></i>
