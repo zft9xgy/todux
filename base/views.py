@@ -270,66 +270,6 @@ def updateTag(request,pk):
 
 
 
-# # simple task htmx
-# def simple(request):
-   
-#     tasks = SimpleTask.objects.all()
-
-#     context = {'tasks':tasks}
-#     return render(request,'base/simple.html',context)
-
-# @require_GET
-# def getSimpleTask(request,id):
-#     task = get_object_or_404(SimpleTask,id=id)
-#     context = {'task':task}
-#     return render(request,'base/simple/edit-task.html',context)
-
-# @require_POST
-# def createSimpleTask(request):
-#     form = SimpleTaskForm(request.POST)
-#     if form.is_valid():
-#         form.save()
-    
-#     tasks = SimpleTask.objects.all()
-
-#     context = {'tasks':tasks}
-#     return render(request,'base/simple/task_list.html',context)
-
-# @require_http_methods(['DELETE'])
-# def deleteSimpleTask(request,id):
-    
-#     task = get_object_or_404(SimpleTask,id=id)
-#     task.delete()
-   
-#     tasks = SimpleTask.objects.all()
-
-#     context = {'tasks':tasks}
-#     return render(request,'base/simple/task_list.html',context)
-
-# @require_POST
-# def editSimpleTask(request,id):
-#     task = get_object_or_404(SimpleTask,id=id)
-#     form = SimpleTaskForm(request.POST,instance=task)
-#     if form.is_valid():
-#         form.save()
-   
-#     tasks = SimpleTask.objects.all()
-
-#     context = {'tasks':tasks}
-#     return render(request,'base/simple/task_list.html',context)
-
-# @require_POST
-# def checkSimpleTask(request,id):
-
-#     task = get_object_or_404(SimpleTask,id=id)
-#     task.done = not task.done
-#     task.save()
-   
-#     context = {'task':task}
-#     return render(request,'base/simple/simple-task.html',context)
-
-    
-
 
 # tag crud htmx
 
