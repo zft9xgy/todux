@@ -1,30 +1,23 @@
 # Todux
 
-The user-centred and community-driven to-do app.
+This project is a model/example project for learning how to use [HTMX](https://htmx.org/) with [Django](https://www.djangoproject.com/). In this project I also want to implement other libraries that go hand in hand like [Alpine.js](https://alpinejs.dev/) and the use of [Django Components](https://github.com/EmilStenstrom/django-components/).
 
+Currently the implementation only includes htmx in the CRUD of tags, projects, and task. and task CRUD, but later on I want to implement changes in the state of components based on actions in the CRUD. I want to explore hx-headers and server sent events.
 
-This project has been created to learn and polish skills with django and python. 
+By the way, the best To-Do app: [todoist](https://todoist.com/).
 
-Thanks to [Dennis Ivy](https://dennisivy.com/) for the incredible [django tutorial](https://youtu.be/PtQiiknWUcI?feature=shared) where i learn the basics to do my project  
-
-Strongly inspired by [todoist](https://todoist.com/).
-
-
-## Model 
+## Model
 
 - User
-    - Tasks
-    - Projects 
-    - Tags
+  - Tasks
+  - Projects
+  - Tags
 
-![model diagram](./misc/assets/todux-model-diagram.png "entity diagram like diagram")
+![model diagram](./misc/todux-model-diagram.png "entity diagram like diagram")
 
+Each task can only be assigned to one project. Each task can have as many tags as you want.
 
-
-Each task can only be assigned to one project. Each task can have as many tags as you want. 
-
-
-## Usage and tested
+## Usage and test
 
 ```sh
 git clone https://github.com/zft9xgy/todux.git
@@ -34,9 +27,3 @@ python manage.py makemigrations
 python manage.py migrate
 python manage.py runserver
 ```
-
-
-
-## Next steps
-
-Next step will be implementing a front-end with React.js
