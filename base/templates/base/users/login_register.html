@@ -1,34 +1,24 @@
-{% extends 'main.html' %}
-
-
-{% block content %}
-
-{% if page == 'login' %}
+{% include 'head.html' %}
+<!-- -->{% include 'header.html' %}
+<!-- -->{% if page == 'login' %}
 <div>
-    <form action="" method="POST">
-
-       {% csrf_token %} 
-        <label>Username</label>
-        <input type="text" name="username" placeholder="enter your username">
-        <label>Username</label>
-        <input type="password" name="password"  placeholder="enter your password">
-        <input type="submit" value="Login">
-    </form>
-    <p>¿Aun no tienes una cuenta?</p>
-    <a href="{% url 'register' %}">Crear cuenta</a>
+  <form action="" method="POST">
+    {% csrf_token %}
+    <label>Username</label>
+    <input type="text" name="username" placeholder="enter your username" />
+    <label>Username</label>
+    <input type="password" name="password" placeholder="enter your password" />
+    <input type="submit" value="Login" />
+  </form>
 </div>
 {% elif page == 'register' %}
 <div>
-    <form action="" method="POST">
+  <form action="" method="POST">
+    {% csrf_token %} {{ form.as_p }}
 
-       {% csrf_token %} 
-       {{ form.as_p }}
-       
-        <input type="submit" value="Register">
-    </form>
-    <p>¿Ya estas registrado?</p>
-    <a href="{% url 'login' %}">Iniciar sesion</a>
+    <input type="submit" value="Register" />
+  </form>
+  <p>¿Ya estas registrado?</p>
+  <a href="{% url 'login' %}">Iniciar sesion</a>
 </div>
 {% endif %}
-
-{% endblock %}

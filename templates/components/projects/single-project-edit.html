@@ -1,14 +1,16 @@
 <div class="simple-project" id="project-{{project.id}}">
   <form>
     <input type="text" name="title" id="" value="{{project.title}}" autofocus />
-    <a
+    <input
+      type="submit"
+      value="Edit"
       class="pointer"
       hx-post="{% url 'project-update' project.id %}"
       hx-target="#list-projects"
       hx-swap="outerHTML"
       type="submit"
     >
-      Edit
-    </a>
+      
+    </input>
   </form>
 </div>

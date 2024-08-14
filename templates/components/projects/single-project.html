@@ -1,8 +1,6 @@
 <div class="project" id="project-{{project.id}}">
   <div class="project-meta">({{project.task_set.all.count}})</div>
-  <div class="project-title">
-    <a href="{% url 'project' project.id %}">@{{project.title}}</a>
-  </div>
+  <div class="project-title">@{{project.title}}</div>
   <div class="project-control">
     [<a
       hx-get="{% url 'project-update' project.id %}"

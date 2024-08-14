@@ -1,6 +1,6 @@
 from django.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator
-from django.contrib.auth.models import User
+#from django.contrib.auth.models import User
 
 class Project(models.Model):
 
@@ -13,11 +13,11 @@ class Project(models.Model):
     created = models.DateTimeField(auto_now_add=True)
 
     # relational data
-    owner = models.ForeignKey(User, on_delete=models.CASCADE,null=True)
+    #owner = models.ForeignKey(User, on_delete=models.CASCADE,null=True)
 
-    class Meta:
-        # Agregar restricción única para la combinación de title y owner
-        unique_together = ['title', 'owner']
+    # class Meta:
+    #     # Agregar restricción única para la combinación de title y owner
+    #     unique_together = ['title', 'owner']
 
     def __str__(self):
         return f'Project {self.id}: {self.title}'
@@ -27,11 +27,11 @@ class Tag(models.Model):
     name = models.CharField(max_length=100)
 
     # relational data
-    owner = models.ForeignKey(User, on_delete=models.CASCADE,null=True)
+    #owner = models.ForeignKey(User, on_delete=models.CASCADE,null=True)
 
-    class Meta:
-        # Agregar restricción única para la combinación de name y owner
-        unique_together = ['name', 'owner']
+    # class Meta:
+    #     # Agregar restricción única para la combinación de name y owner
+    #     unique_together = ['name', 'owner']
 
     def __str__(self):
         return self.name
@@ -57,7 +57,7 @@ class Task(models.Model):
 
     # relational
     project = models.ForeignKey(Project, on_delete=models.CASCADE,null=True,blank=True)
-    owner = models.ForeignKey(User, on_delete=models.CASCADE,null=True)
+    #owner = models.ForeignKey(User, on_delete=models.CASCADE,null=True)
     tags = models.ManyToManyField(Tag, blank=True)
 
     class Meta():
@@ -66,4 +66,4 @@ class Task(models.Model):
 
     def __str__(self):
         status = "Done" if self.done else "Not Done"
-        return f'Owner: {self.owner} Task {self.id}: {self.title} - Description: {self.description} -({status}) [Project ID: {self.project_id}] - Tags[{self.tags} - ]'
+        return f'Task {self.id}: {self.title} - Description: {self.description} -({status}) [Project ID: {self.project_id}] - Tags[{self.tags} - ]'
