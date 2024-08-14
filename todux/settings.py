@@ -9,7 +9,8 @@ ENV_DIR=os.path.join(BASE_DIR, '.env')
 
 load_dotenv(ENV_DIR)
 
-PRODUCTION = (os.environ.get("MY_ENV_FILE") == "True")
+PRODUCTION = (os.environ.get("DJANGO_PRODUCTION") == "True")
+
 
 
 SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY", get_random_secret_key())
@@ -18,7 +19,6 @@ if PRODUCTION:
     ALLOWED_HOSTS = ['dev.rafaelcosquiere.com']
     CSRF_TRUSTED_ORIGINS = ['https://dev.rafaelcosquiere.com']
     CSRF_COOKIE_SECURE = True
-
     DEBUG = False
 else:
     ALLOWED_HOSTS = ['localhost','127.0.0.1','192.168.1.113']
@@ -110,7 +110,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 
-STATIC_URL = '/static/'
+STATIC_URL = '/todux/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
@@ -123,4 +123,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 
-DEBUG = True
+# todux custom settings
+#FORCE_SCRIPT_NAME = '/todux'
