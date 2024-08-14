@@ -1,28 +1,21 @@
-from pathlib import Path, os
-import sys
-from django.core.management.utils import get_random_secret_key
-from dotenv import load_dotenv
+from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-ENV_DIR=os.path.join(BASE_DIR, '.env')
-
-load_dotenv(ENV_DIR)
-
-PRODUCTION = (os.environ.get("MY_ENV_FILE") == "True")
 
 
-SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY", get_random_secret_key())
+# Quick-start development settings - unsuitable for production
+# See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
-if PRODUCTION:  
-    ALLOWED_HOSTS = ['dev.rafaelcosquiere.com']
-    CSRF_TRUSTED_ORIGINS = ['https://dev.rafaelcosquiere.com']
-    CSRF_COOKIE_SECURE = True
+# SECURITY WARNING: keep the secret key used in production secret!
+SECRET_KEY = 'django-insecure-e1!@j6wncl_-6bkav65l0wer636t_5($-p*p-n@e%0jg_g6s57'
 
-    DEBUG = False
-else:
-    ALLOWED_HOSTS = ['localhost','127.0.0.1','192.168.1.113']
-    DEBUG = True
+# SECURITY WARNING: don't run with debug turned on in production!
+DEBUG = True
+ALLOWED_HOSTS = ['*']
+
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -37,7 +30,6 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -118,9 +110,3 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-
-STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
-
-
-DEBUG = False
